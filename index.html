@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Annamites Coffee Roasters</title>
+    <link rel="icon" type="image/png" href="app/Favicon/anh mau (1).png" sizes="32x32">
+    <link rel="icon" type="image/png" href="app/Favicon/anh mau (1) 16x16.png" sizes="16x16">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'My Custom Font';
+            src: url(app/annamites_theme/fonts/Adam-Bold.ttf) format('truetype');
+        }
+        @font-face {
+            font-family: 'Cochin';
+            src: url(app/annamites_theme/fonts/CochinLTStd.ttf) format('truetype');
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'My Custom Font';
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4e1c9;
+            font-size: large;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #173119;
+            color: #DCA471;
+            text-align: center;
+            padding: 20px;
+        }
+        .logo {
+            max-width: 200px;
+            margin-bottom: 10px;
+        }
+        nav {
+            padding: 10px;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            font-size: 40px;
+        }
+        nav ul li {
+            margin: 0 50px;
+        }
+        nav ul li a {
+            color: #173119;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px 0;
+            font-family: 'Cochin';
+            font-size: 24px;
+        }
+        .brand-description {
+            margin-bottom: 20px;
+        }
+        .cafe-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            display: block;
+        }
+        .opening-hours {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .address {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .pick-up-btn {
+            display: block;
+            width: 150px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #173119;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .image-gallery img {
+            width: calc(25% - 10px);
+            max-width: 200px;
+            height: auto;
+        }
+        footer {
+            background-color: #173119;
+            color: #dca471;
+            text-align: center;
+            padding: 10px;
+            font-size: 1em;
+        }
+        p.smalltittle {
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 5px 0;
+            }
+            .image-gallery img {
+                width: calc(50% - 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="app/media/Frame 1 (5).png" alt="The Annamites Logo" class="logo">
+        <h1>THE ANNAMITES</h1>
+        <p class="smalltittle">Coffee Roasters - Strength in every sip</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="content">
+            <div class="brand-description">
+                <p>The Annamites is a Vietnamese coffee brand inspired by the name "An Nam", a region in Indochina where Asian and European cultures intersect. The brand incorporates the image of the traditional Vietnamese conical hat, a symbol of simplicity and elegance, along with decorative motifs from the Indochina era, creating a unique brand identity that blends classic and modern elements.</p>
+                <p>Each product from The Annamites is not just a delicious cup of coffee but also a connection to Vietnamese culture. The brand aims to provide customers with a holistic experience where flavor and cultural values intertwine, fostering a sense of closeness and connection with the land of An Nam.</p>
+            </div>
+
+            <img src="app/media/m2.jpg" alt="The Annamites Cafe Interior" class="cafe-image">
+
+            <div class="opening-hours">
+                <p>We are here for you! Daily 11:00–22:00</p>
+            </div>
+
+            <div class="address">
+                <p>Fallstraße 26<br>81369 München, Germany</p>
+            </div>
+
+            <a href="#" class="pick-up-btn">Pick Up</a>
+
+            <div class="image-gallery">
+                <img src="app/media/m3.jpg" alt="Coffee 1">
+                <img src="app/media/m4.jpg" alt="Coffee 2">
+                <img src="app/media/m10.jpg" alt="Coffee 3">
+                <img src="app/media/m6.jpg" alt="Coffee 4">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Following Us</p>
+        <p><i class="fa-solid fa-phone" style="margin-right: 10px;"></i>+49 162 4100586</p>
+        <p><i class="fab fa-facebook" style="margin-right: 10px;"></i><a href="https://www.facebook.com/theannamites" style="color: #DCA471;">The Annamites Coffee Roasters</a></p>
+        <p><i class="fa-solid fa-envelope" style="margin-right: 10px;"></i>Theannamitescoffeeroasters@gmail.com</p>
+    </footer>
+</body>
+</html>
