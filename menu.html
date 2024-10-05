@@ -117,27 +117,121 @@
                 width: 100%;
             }
         }
+        /* Add styles for the language toggle */
+        .language-toggle-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+
+        #language-toggle {
+            background-color: #DCA471;
+            border: none;
+            color: #173119;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #language-toggle:hover {
+            background-color: #b78951;
+        }
     </style>
+    <script>
+        const translations = {
+            'de': {
+                'title': 'THE ANNAMITES',
+                'subtitle': 'Coffee Roasters - Stärke in jedem Schluck',
+                'home': 'Startseite',
+                'menu': 'Speisekarte',
+                'contact': 'Kontakt',
+                'handBrew': 'Handgebrüht',
+                'coffee': 'Kaffee',
+                'signature': 'Spezialitäten',
+                'nonCoffee': 'Ohne Kaffee',
+                'coldBrew': 'Cold Brew',
+                'followingUs': 'Folgen Sie uns'
+            },
+            'en': {
+                'title': 'THE ANNAMITES',
+                'subtitle': 'Coffee Roasters - Strength in every sip',
+                'home': 'Home',
+                'menu': 'Menu',
+                'contact': 'Contact',
+                'handBrew': 'Hand Brew',
+                'coffee': 'Coffee',
+                'signature': 'Signature',
+                'nonCoffee': 'Non-Coffee',
+                'coldBrew': 'Cold Brew',
+                'followingUs': 'Follow Us'
+            }
+        };
+
+        let currentLanguage = localStorage.getItem('language') || 'de';
+
+        function switchLanguage() {
+            currentLanguage = (currentLanguage === 'de') ? 'en' : 'de';
+            localStorage.setItem('language', currentLanguage);
+            updateLanguageButton();
+            updatePageContent();
+        }
+
+        function updateLanguageButton() {
+            const button = document.getElementById('language-toggle');
+            if (currentLanguage === 'de') {
+                button.innerHTML = 'Change Language: English';
+            } else {
+                button.innerHTML = 'Change Language: German';
+            }
+        }
+
+        function updatePageContent() {
+            document.getElementById('title').innerText = translations[currentLanguage]['title'];
+            document.getElementById('subtitle').innerText = translations[currentLanguage]['subtitle'];
+            document.getElementById('nav-home').innerText = translations[currentLanguage]['home'];
+            document.getElementById('nav-menu').innerText = translations[currentLanguage]['menu'];
+            document.getElementById('nav-contact').innerText = translations[currentLanguage]['contact'];
+            document.getElementById('hand-brew').innerText = translations[currentLanguage]['handBrew'];
+            document.getElementById('coffee').innerText = translations[currentLanguage]['coffee'];
+            document.getElementById('signature').innerText = translations[currentLanguage]['signature'];
+            document.getElementById('non-coffee').innerText = translations[currentLanguage]['nonCoffee'];
+            document.getElementById('cold-brew').innerText = translations[currentLanguage]['coldBrew'];
+            document.getElementById('following-us').innerText = translations[currentLanguage]['followingUs'];
+
+            document.documentElement.lang = currentLanguage;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('language-toggle').addEventListener('click', switchLanguage);
+            updateLanguageButton();
+            updatePageContent();
+        });
+    </script>
 </head>
 <body>
     <header>
+        <div class="language-toggle-container">
+            <button id="language-toggle">🇬🇧 EN</button>
+        </div>
         <img src="app/media/Frame 1 (5).png" alt="The Annamites Logo" class="logo">
-        <h1>THE ANNAMITES</h1>
-        <p class="smalltittle">Coffee Roasters - Strength in every sip</p>
+        <h1 id="title">THE ANNAMITES</h1>
+        <p id="subtitle" class="smalltittle">Coffee Roasters - Strength in every sip</p>
     </header>
 
     <nav>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="menu.html">Menu</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html" id="nav-home">Home</a></li>
+            <li><a href="menu.html" id="nav-menu">Menu</a></li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <div class="content">
             <div class="menu-section">
-                <h2>Hand Brew</h2>
+                <h2 id="hand-brew">Hand Brew</h2>
                 <div class="menu-item">
                     <span class="menu-item-name">Arabica</span>
                     <span class="menu-item-price">€5,5</span>
@@ -157,7 +251,7 @@
             </div>
 
             <div class="menu-section">
-                <h2>Coffee</h2>
+                <h2 id="coffee">Coffee</h2>
                 <div class="menu-item">
                     <span class="menu-item-name">Espresso</span>
                     <span class="menu-item-price">€2,5</span>
@@ -189,7 +283,7 @@
             </div>
 
             <div class="menu-section">
-                <h2>Signature</h2>
+                <h2 id="signature">Signature</h2>
                 <div class="menu-item">
                     <span class="menu-item-name">Egg Coffee</span>
                     <span class="menu-item-price">€4,5</span>
@@ -213,7 +307,7 @@
             </div>
 
             <div class="menu-section">
-                <h2>Non-Coffee</h2>
+                <h2 id="non-coffee">Non-Coffee</h2>
                 <div class="menu-item">
                     <span class="menu-item-name">Soursop Tea</span>
                     <span class="menu-item-price">€</span>
@@ -241,7 +335,7 @@
             </div>
 
             <div class="menu-section">
-                <h2>Cold Brew</h2>
+                <h2 id="cold-brew">Cold Brew</h2>
                 <div class="menu-item">
                     <span class="menu-item-name">Traditional</span>
                     <span class="menu-item-price">€</span>
@@ -267,7 +361,7 @@
     </div>
 
     <footer>
-        <p>Following Us</p>
+        <p id="following-us">Following Us</p>
         <p><i class="fa-solid fa-phone" style="margin-right: 10px;"></i>+49 162 4100586</p>
         <p><i class="fab fa-facebook" style="margin-right: 10px;"></i><a href="https://www.facebook.com/theannamites" style="color: #DCA471;">The Annamites Coffee Roasters</a></p>
         <p><i class="fa-solid fa-envelope" style="margin-right: 10px;"></i>Theannamitescoffeeroasters@gmail.com</p>

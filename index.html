@@ -38,6 +38,7 @@
             color: #DCA471;
             text-align: center;
             padding: 20px;
+            position: relative; /* Add this to position the language toggle within header */
         }
         .logo {
             max-width: 200px;
@@ -129,41 +130,147 @@
                 width: calc(50% - 10px);
             }
         }
+
+        /* Add styles for the language toggle */
+        .language-toggle-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+
+        #language-toggle {
+            background-color: #DCA471;
+            border: none;
+            color: #173119;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #language-toggle:hover {
+            background-color: #b78951;
+        }
     </style>
+    <script>
+        const translations = {
+            'de': {
+                'title': 'THE ANNAMITES',
+                'subtitle': 'Coffee Roasters - Stärke in jedem Schluck',
+                'home': 'Startseite',
+                'menu': 'Speisekarte',
+                'contact': 'Kontakt',
+                'description1': 'The Annamites ist eine vietnamesische Kaffeemarke inspiriert vom Namen "An Nam", einer Region in Indochina, wo asiatische und europäische Kulturen aufeinandertreffen. Die Marke integriert das Bild des traditionellen vietnamesischen Kegelhuts, ein Symbol für Einfachheit und Eleganz, zusammen mit dekorativen Motiven aus der Indochina-Ära und schafft so eine einzigartige Markenidentität, die klassische und moderne Elemente verbindet.',
+                'description2': 'Jedes Produkt von The Annamites ist nicht nur eine köstliche Tasse Kaffee, sondern auch eine Verbindung zur vietnamesischen Kultur. Die Marke zielt darauf ab, den Kunden ein ganzheitliches Erlebnis zu bieten, bei dem Geschmack und kulturelle Werte miteinander verschmelzen, und fördert ein Gefühl der Nähe und Verbundenheit mit dem Land An Nam.',
+                'openingHours': 'Wir sind für euch da! Täglich 11:00–22:00 Uhr',
+                'address': 'Fallstraße 26<br>81369 München, Deutschland',
+                'pickUp': 'Abholen',
+                'followingUs': 'Folge uns',
+                'phone': '+49 162 4100586',
+                'facebook': 'The Annamites Coffee Roasters',
+                'email': 'Theannamitescoffeeroasters@gmail.com'
+            },
+            'en': {
+                'title': 'THE ANNAMITES',
+                'subtitle': 'Coffee Roasters - Strength in every sip',
+                'home': 'Home',
+                'menu': 'Menu',
+                'contact': 'Contact',
+                'description1': 'The Annamites is a Vietnamese coffee brand inspired by the name "An Nam", a region in Indochina where Asian and European cultures intersect. The brand incorporates the image of the traditional Vietnamese conical hat, a symbol of simplicity and elegance, along with decorative motifs from the Indochina era, creating a unique brand identity that blends classic and modern elements.',
+                'description2': 'Each product from The Annamites is not just a delicious cup of coffee but also a connection to Vietnamese culture. The brand aims to provide customers with a holistic experience where flavor and cultural values intertwine, fostering a sense of closeness and connection with the land of An Nam.',
+                'openingHours': 'We are here for you! Daily 11:00–22:00',
+                'address': 'Fallstraße 26<br>81369 Munich, Germany',
+                'pickUp': 'Pick Up',
+                'followingUs': 'Follow Us',
+                'phone': '+49 162 4100586',
+                'facebook': 'The Annamites Coffee Roasters',
+                'email': 'Theannamitescoffeeroasters@gmail.com'
+            }
+        };
+
+        let currentLanguage = localStorage.getItem('language') || 'de'; // Get language from localStorage or use default
+
+        function switchLanguage() {
+            currentLanguage = (currentLanguage === 'de') ? 'en' : 'de';
+            localStorage.setItem('language', currentLanguage); // Store the language preference
+            updateLanguageButton();
+            updatePageContent();
+        }
+
+        function updateLanguageButton() {
+            const button = document.getElementById('language-toggle');
+            if (currentLanguage === 'de') {
+                button.innerHTML = 'Change Language: English';
+            } else {
+                button.innerHTML = 'Change Language: German';
+            }
+        }
+
+        function updatePageContent() {
+            document.getElementById('title').innerText = translations[currentLanguage]['title'];
+            document.getElementById('subtitle').innerText = translations[currentLanguage]['subtitle'];
+            document.getElementById('nav-home').innerText = translations[currentLanguage]['home'];
+            document.getElementById('nav-menu').innerText = translations[currentLanguage]['menu'];
+            document.getElementById('nav-contact').innerText = translations[currentLanguage]['contact'];
+            document.getElementById('description1').innerText = translations[currentLanguage]['description1'];
+            document.getElementById('description2').innerText = translations[currentLanguage]['description2'];
+            document.getElementById('opening-hours').innerText = translations[currentLanguage]['openingHours'];
+            document.getElementById('address').innerHTML = translations[currentLanguage]['address'];
+            document.getElementById('pick-up-btn').innerText = translations[currentLanguage]['pickUp'];
+            document.getElementById('following-us').innerText = translations[currentLanguage]['followingUs'];
+            document.getElementById('phone').innerText = translations[currentLanguage]['phone'];
+            document.getElementById('facebook-link').innerText = translations[currentLanguage]['facebook'];
+            document.getElementById('email').innerText = translations[currentLanguage]['email'];
+
+            // Update the language attribute of the HTML tag
+            document.documentElement.lang = currentLanguage;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('language-toggle').addEventListener('click', switchLanguage);
+            updateLanguageButton(); // Set initial button state
+            updatePageContent(); // Set initial page content based on saved language
+        });
+    </script>
 </head>
 <body>
+    <!-- Move the language toggle inside the header to position it correctly -->
     <header>
+        <div class="language-toggle-container">
+            <button id="language-toggle">🇬🇧 EN</button>
+        </div>
         <img src="app/media/Frame 1 (5).png" alt="The Annamites Logo" class="logo">
-        <h1>THE ANNAMITES</h1>
-        <p class="smalltittle">Coffee Roasters - Strength in every sip</p>
+        <h1 id="title">THE ANNAMITES</h1>
+        <p id="subtitle" class="smalltittle">Coffee Roasters - Strength in every sip</p>
     </header>
 
     <nav>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="menu.html">Menu</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html" id="nav-home">Home</a></li>
+            <li><a href="menu.html" id="nav-menu">Menu</a></li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <div class="content">
             <div class="brand-description">
-                <p>The Annamites is a Vietnamese coffee brand inspired by the name "An Nam", a region in Indochina where Asian and European cultures intersect. The brand incorporates the image of the traditional Vietnamese conical hat, a symbol of simplicity and elegance, along with decorative motifs from the Indochina era, creating a unique brand identity that blends classic and modern elements.</p>
-                <p>Each product from The Annamites is not just a delicious cup of coffee but also a connection to Vietnamese culture. The brand aims to provide customers with a holistic experience where flavor and cultural values intertwine, fostering a sense of closeness and connection with the land of An Nam.</p>
+                <p id="description1">The Annamites is a Vietnamese coffee brand inspired by the name "An Nam", a region in Indochina where Asian and European cultures intersect. The brand incorporates the image of the traditional Vietnamese conical hat, a symbol of simplicity and elegance, along with decorative motifs from the Indochina era, creating a unique brand identity that blends classic and modern elements.</p>
+                <p id="description2">Each product from The Annamites is not just a delicious cup of coffee but also a connection to Vietnamese culture. The brand aims to provide customers with a holistic experience where flavor and cultural values intertwine, fostering a sense of closeness and connection with the land of An Nam.</p>
             </div>
 
             <img src="app/media/m2.jpg" alt="The Annamites Cafe Interior" class="cafe-image">
 
             <div class="opening-hours">
-                <p>We are here for you! Daily 11:00–22:00</p>
+                <p id="opening-hours">We are here for you! Daily 11:00–22:00</p>
             </div>
 
             <div class="address">
-                <p>Fallstraße 26<br>81369 München, Germany</p>
+                <p id="address">Fallstraße 26<br>81369 München, Germany</p>
             </div>
 
-            <a href="#" class="pick-up-btn">Pick Up</a>
+            <a href="#" class="pick-up-btn" id="pick-up-btn">Pick Up</a>
 
             <div class="image-gallery">
                 <img src="app/media/m3.jpg" alt="Coffee 1">
@@ -175,10 +282,10 @@
     </div>
 
     <footer>
-        <p>Following Us</p>
-        <p><i class="fa-solid fa-phone" style="margin-right: 10px;"></i>+49 162 4100586</p>
-        <p><i class="fab fa-facebook" style="margin-right: 10px;"></i><a href="https://www.facebook.com/theannamites" style="color: #DCA471;">The Annamites Coffee Roasters</a></p>
-        <p><i class="fa-solid fa-envelope" style="margin-right: 10px;"></i>Theannamitescoffeeroasters@gmail.com</p>
+        <p id="following-us">Following Us</p>
+        <p><i class="fa-solid fa-phone" style="margin-right: 10px;"></i><span id="phone">+49 162 4100586</span></p>
+        <p><i class="fab fa-facebook" style="margin-right: 10px;"></i><a href="https://www.facebook.com/theannamites" style="color: #DCA471;" id="facebook-link">The Annamites Coffee Roasters</a></p>
+        <p><i class="fa-solid fa-envelope" style="margin-right: 10px;"></i><span id="email">Theannamitescoffeeroasters@gmail.com</span></p>
     </footer>
 </body>
 </html>

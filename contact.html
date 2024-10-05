@@ -93,7 +93,6 @@
             border: none;
             padding: 10px 20px;
             cursor: pointer;
-            font-weight: bold;
         }
         button:hover {
             background-color: #2a4f2a;
@@ -122,41 +121,154 @@
                 margin: 5px 0;
             }
         }
+
+        /* Add styles for the language toggle */
+        .language-toggle-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+
+        #language-toggle {
+            background-color: #DCA471;
+            border: none;
+            color: #173119;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #language-toggle:hover {
+            background-color: #b78951;
+        }
     </style>
+    <script>
+        const translations = {
+            'de': {
+                'title': 'THE ANNAMITES',
+                'subtitle': 'Coffee Roasters - Stärke in jedem Schluck',
+                'home': 'Startseite',
+                'menu': 'Speisekarte',
+                'contact': 'Kontakt',
+                'contactUs': 'Kontaktieren Sie uns',
+                'address': 'Adresse',
+                'phone': 'Telefon',
+                'email': 'E-Mail',
+                'hours': 'Öffnungszeiten',
+                'sendMessage': 'Senden Sie uns eine Nachricht',
+                'yourName': 'Ihr Name',
+                'yourEmail': 'Ihre E-Mail',
+                'subject': 'Betreff',
+                'yourMessage': 'Ihre Nachricht',
+                'send': 'Senden',
+                'followingUs': 'Folgen Sie uns'
+            },
+            'en': {
+                'title': 'THE ANNAMITES',
+                'subtitle': 'Coffee Roasters - Strength in every sip',
+                'home': 'Home',
+                'menu': 'Menu',
+                'contact': 'Contact',
+                'contactUs': 'Contact Us',
+                'address': 'Address',
+                'phone': 'Phone',
+                'email': 'Email',
+                'hours': 'Hours',
+                'sendMessage': 'Send us a message',
+                'yourName': 'Your Name',
+                'yourEmail': 'Your Email',
+                'subject': 'Subject',
+                'yourMessage': 'Your Message',
+                'send': 'Send',
+                'followingUs': 'Follow Us'
+            }
+        };
+
+        let currentLanguage = localStorage.getItem('language') || 'de';
+
+        function switchLanguage() {
+            currentLanguage = (currentLanguage === 'de') ? 'en' : 'de';
+            localStorage.setItem('language', currentLanguage);
+            updateLanguageButton();
+            updatePageContent();
+        }
+
+        function updateLanguageButton() {
+            const button = document.getElementById('language-toggle');
+            if (currentLanguage === 'de') {
+                button.innerHTML = 'Change Language: English';
+            } else {
+                button.innerHTML = 'Change Language: German';
+            }
+        }
+
+        function updatePageContent() {
+            document.getElementById('title').innerText = translations[currentLanguage]['title'];
+            document.getElementById('subtitle').innerText = translations[currentLanguage]['subtitle'];
+            document.getElementById('nav-home').innerText = translations[currentLanguage]['home'];
+            document.getElementById('nav-menu').innerText = translations[currentLanguage]['menu'];
+            document.getElementById('nav-contact').innerText = translations[currentLanguage]['contact'];
+            document.getElementById('contact-us').innerText = translations[currentLanguage]['contactUs'];
+            document.getElementById('address-label').innerText = translations[currentLanguage]['address'];
+            document.getElementById('phone-label').innerText = translations[currentLanguage]['phone'];
+            document.getElementById('email-label').innerText = translations[currentLanguage]['email'];
+            document.getElementById('hours-label').innerText = translations[currentLanguage]['hours'];
+            document.getElementById('send-message').innerText = translations[currentLanguage]['sendMessage'];
+            document.getElementById('name-input').placeholder = translations[currentLanguage]['yourName'];
+            document.getElementById('email-input').placeholder = translations[currentLanguage]['yourEmail'];
+            document.getElementById('subject-input').placeholder = translations[currentLanguage]['subject'];
+            document.getElementById('message-input').placeholder = translations[currentLanguage]['yourMessage'];
+            document.getElementById('send-button').innerText = translations[currentLanguage]['send'];
+            document.getElementById('following-us').innerText = translations[currentLanguage]['followingUs'];
+
+            document.documentElement.lang = currentLanguage;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('language-toggle').addEventListener('click', switchLanguage);
+            updateLanguageButton();
+            updatePageContent();
+        });
+    </script>
 </head>
 <body>
     <header>
+        <div class="language-toggle-container">
+            <button id="language-toggle">🇬🇧 EN</button>
+        </div>
         <img src="app/media/Frame 1 (5).png" alt="The Annamites Logo" class="logo">
-        <h1>THE ANNAMITES</h1>
-        <p class="smalltittle">Coffee Roasters - Strength in every sip</p>
+        <h1 id="title">THE ANNAMITES</h1>
+        <p id="subtitle" class="smalltittle">Coffee Roasters - Strength in every sip</p>
     </header>
 
     <nav>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="menu.html">Menu</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html" id="nav-home">Home</a></li>
+            <li><a href="menu.html" id="nav-menu">Menu</a></li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <div class="content">
             <div class="contact-info">
-                <h2>Contact Us</h2>
-                <p><strong>Address:</strong> Fallstraße 26, 81369 München, Germany</p>
-                <p><strong>Phone:</strong> +49 162 4100586</p>
-                <p><strong>Email:</strong> info@theannamites.de</p>
-                <p><strong>Hours:</strong> Daily 11:00 - 22:00</p>
+                <h2 id="contact-us">Contact Us</h2>
+                <p><strong id="address-label">Address:</strong> Fallstraße 26, 81369 München, Germany</p>
+                <p><strong id="phone-label">Phone:</strong> +49 162 4100586</p>
+                <p><strong id="email-label">Email:</strong> info@theannamites.de</p>
+                <p><strong id="hours-label">Hours:</strong> Daily 11:00 - 22:00</p>
             </div>
 
             <div class="contact-form">
-                <h2>Send us a message</h2>
+                <h2 id="send-message">Send us a message</h2>
                 <form>
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <input type="text" name="subject" placeholder="Subject">
-                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                    <button type="submit">Send Message</button>
+                    <input type="text" name="name" id="name-input" placeholder="Your Name" required>
+                    <input type="email" name="email" id="email-input" placeholder="Your Email" required>
+                    <input type="text" name="subject" id="subject-input" placeholder="Subject">
+                    <textarea name="message" id="message-input" placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" id="send-button">Send Message</button>
                 </form>
             </div>
 
@@ -167,7 +279,7 @@
     </div>
 
     <footer>
-        <p>Following Us</p>
+        <p id="following-us">Following Us</p>
         <p><i class="fa-solid fa-phone" style="margin-right: 10px;"></i>+49 162 4100586</p>
         <p><i class="fab fa-facebook" style="margin-right: 10px;"></i><a href="https://www.facebook.com/theannamites" style="color: #DCA471;">The Annamites Coffee Roasters</a></p>
         <p><i class="fa-solid fa-envelope" style="margin-right: 10px;"></i>Theannamitescoffeeroasters@gmail.com</p>
